@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/covid19Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text=" Covid19 "
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/countryName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/covid19Title"
+        android:padding="10dp"
+        android:text="@string/countryName"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/countryNamePrompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/covid19Title"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/countryName"
+        android:hint="Italy"
+        android:padding="10dp"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/fromDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/countryName"
+        android:padding="10dp"
+        android:text="@string/fromDate"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/fromDatePrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/countryNamePrompt"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/fromDate"
+        android:hint="DD-MM-YYYY"
+        android:padding="10dp"
+        android:textSize="25dp" />
+
+
+    <TextView
+        android:id="@+id/toDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fromDate"
+        android:padding="10dp"
+        android:text="@string/toDate"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/toDatePrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fromDatePrompt"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/toDate"
+        android:hint="DD-MM-YYYY"
+        android:padding="10dp"
+        android:textSize="25dp" />
+
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toDate"
+        android:paddingTop="10dp"
+        android:text="@string/search"
+        android:textSize="20dp" />
+
+
+</RelativeLayout>

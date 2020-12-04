@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Covid</string>
+    <string name="countryName">" Nom du pays"</string>
+    <string name="fromDate">" partir de la date"</string>
+    <string name="toDate">" à ce jour"</string>
+    <string name="search">Chercher</string>
+</resources>
