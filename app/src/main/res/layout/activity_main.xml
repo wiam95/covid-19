@@ -32,7 +32,7 @@
         android:layout_below="@+id/covid19Title"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/countryName"
-        android:hint="Italy"
+        android:hint="country name"
         android:padding="10dp"
         android:textSize="25dp" />
 
@@ -52,7 +52,7 @@
         android:layout_below="@+id/countryNamePrompt"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/fromDate"
-        android:hint="DD-MM-YYYY"
+        android:hint="YYYY-MM-DD"
         android:padding="10dp"
         android:textSize="25dp" />
 
@@ -73,7 +73,7 @@
         android:layout_below="@+id/fromDatePrompt"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/toDate"
-        android:hint="DD-MM-YYYY"
+        android:hint="YYYY-MM-DD"
         android:padding="10dp"
         android:textSize="25dp" />
 
