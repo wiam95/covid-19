@@ -41,6 +41,7 @@ public class CovidQuery extends AppCompatActivity {
     String searchQ, query1, query2, query3, query4;
     TextView provinceName, dateD, numCasesC;
     ListView myList;
+    TextView provinceTextView;
 
     Button refreshList;
 
@@ -55,10 +56,9 @@ public class CovidQuery extends AppCompatActivity {
         dateD = findViewById(R.id.dateD);
         numCasesC = findViewById(R.id.numCasesC);
         myList = findViewById(R.id.covidListView);
+        provinceTextView = findViewById(R.id.provinceTextView);
 
         refreshList = findViewById(R.id.refreshList);
-
-
 
         //progressBar.setVisibility(View.VISIBLE);
 
@@ -83,7 +83,6 @@ public class CovidQuery extends AppCompatActivity {
         //Two lines of code to get AsyncTask going to retrieve data from a site
         CQuery req = new CQuery(); //Creates a background thread
         req.execute(searchQ); //Type 1
-        //req.execute("https://api.covid19api.com/country/CANADA/status/confirmed/live?from=2020-10-14T00:00:00Z&to=2020-10-15T00:00:00Z");
 
         myList.setAdapter( (ListAdapter) ( myAdapter = new MyListAdapter() ) );
 
@@ -165,7 +164,7 @@ public class CovidQuery extends AppCompatActivity {
 
             //progressBar.setVisibility(View.INVISIBLE);
 
-            super.onPostExecute(covidList);
+            //super.onPostExecute(covidList);
 
 
         }
@@ -194,11 +193,12 @@ public class CovidQuery extends AppCompatActivity {
             newView = inflater.inflate(R.layout.c_list, parent, false);
 
 
+            TextView prov = findViewById(R.id.provinceTextView);
+
             //set what should be in this row:
             provinceName.setText( covidList.get(position).getProv() );
             dateD.setText( covidList.get(position).getDate() );
             numCasesC.setText( covidList.get(position).getCases() );
-
 
 
             //return it to be put in the table
@@ -206,6 +206,7 @@ public class CovidQuery extends AppCompatActivity {
         }
 
     } //End of Base adapter class
+
 
     //inner class CovidEntry
     public static class CovidEntry {
