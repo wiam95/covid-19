@@ -5,41 +5,41 @@
 
     <TextView
         android:id="@+id/province"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
         android:text="Province: "/>
 
     <TextView
         android:id="@+id/provinceName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
         android:layout_toRightOf="@+id/province" />
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
         android:layout_below="@+id/province"
         android:text="Date: "/>
 
     <TextView
         android:id="@+id/dateD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
         android:layout_toRightOf="@+id/date"
         android:layout_below="@+id/province"/>
 
     <TextView
         android:id="@+id/numCases"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
         android:layout_below="@+id/date"
         android:text="Cases: "/>
 
     <TextView
         android:id="@+id/numCasesC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
         android:layout_toRightOf="@+id/numCases"
         android:layout_below="@+id/date"/>
 

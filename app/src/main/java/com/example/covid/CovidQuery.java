@@ -2,7 +2,6 @@ package com.example.covid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -35,14 +35,14 @@ public class CovidQuery extends AppCompatActivity {
 
     //ProgressBar progressBar;
 
-    ArrayList<String> covidList = new ArrayList<String>();
+    private ArrayList<CovidEntry> covidList = new ArrayList<>();
     private MyListAdapter myAdapter;
 
     String searchQ, query1, query2, query3, query4;
     TextView provinceName, dateD, numCasesC;
     ListView myList;
 
-    TextView testing;
+    Button refreshList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,9 @@ public class CovidQuery extends AppCompatActivity {
         numCasesC = findViewById(R.id.numCasesC);
         myList = findViewById(R.id.covidListView);
 
-        testing = findViewById(R.id.testingSucks);
+        refreshList = findViewById(R.id.refreshList);
 
-        myList.setAdapter( (ListAdapter) ( myAdapter = new MyListAdapter() ) );
+
 
         //progressBar.setVisibility(View.VISIBLE);
 
@@ -76,26 +76,30 @@ public class CovidQuery extends AppCompatActivity {
         String startDate = intent.getStringExtra("dateStart");
         String endDate = intent.getStringExtra("dateEnd");
 
-        myAdapter.notifyDataSetChanged();
 
         //Putting together the query for the API needed to search
         searchQ = query1 + countryName + query2 + startDate + query3 + endDate + query4;
-
-        //query.setText(searchQ); //Sets the passed text to eMail
 
         //Two lines of code to get AsyncTask going to retrieve data from a site
         CQuery req = new CQuery(); //Creates a background thread
         req.execute(searchQ); //Type 1
         //req.execute("https://api.covid19api.com/country/CANADA/status/confirmed/live?from=2020-10-14T00:00:00Z&to=2020-10-15T00:00:00Z");
 
+        myList.setAdapter( (ListAdapter) ( myAdapter = new MyListAdapter() ) );
+
+        //Refresh button
+        refreshList.setOnClickListener(click-> {
+            myAdapter.notifyDataSetChanged();
+        });
 
 
-    }
+
+    } //End of onCreate method
 
     //Type 1, Type 2, Type 3
-    public class CQuery extends AsyncTask< String, Integer, ArrayList<String> > {
+    public class CQuery extends AsyncTask< String, Integer, ArrayList<CovidEntry> > {
 
-        protected ArrayList<String> doInBackground(String... args) {
+        protected ArrayList<CovidEntry> doInBackground(String... args) {
 
             try {
 
@@ -132,19 +136,11 @@ public class CovidQuery extends AppCompatActivity {
                     //This will get the JSON Object at that position in the array
                     JSONObject currentObj = covidData.getJSONObject(i);
 
-                    String Cprov = currentObj.getString("Province");
-                    String Cdate = currentObj.getString("Date");
-                    int cCases = currentObj.getInt("Cases");
+                    String covidProvince = currentObj.getString("Province");
+                    String covidDate = currentObj.getString("Date");
+                    int covidCases = currentObj.getInt("Cases");
 
-
-                    String combined = "";
-
-                    combined += Cprov + ", ";
-                    combined += Cdate + ", ";
-                    combined += cCases;
-
-                    //Each array element is now a single string seperated by newline
-                    covidList.add(combined);
+                    covidList.add( new CovidEntry(covidProvince, covidDate, covidCases) );
                 }
 
 
@@ -165,9 +161,12 @@ public class CovidQuery extends AppCompatActivity {
         }
 
         //Type 3
-        public void onPostExecute(ArrayList<String> covidList) {
+        public void onPostExecute(ArrayList<CovidEntry> covidList) {
 
             //progressBar.setVisibility(View.INVISIBLE);
+
+            super.onPostExecute(covidList);
+
 
         }
 
@@ -180,7 +179,7 @@ public class CovidQuery extends AppCompatActivity {
             return covidList.size();
         } //Size of arrayList
 
-        public String getItem(int position) { return covidList.get(position); } //Gets the item
+        public CovidEntry getItem(int position) { return covidList.get(position); } //Gets the item
 
         public long getItemId(int position) {
             return position;
@@ -190,39 +189,43 @@ public class CovidQuery extends AppCompatActivity {
         public View getView(int position, View old, ViewGroup parent) {
 
             View newView;
-            LayoutInflater inflater = getLayoutInflater();
 
+            LayoutInflater inflater = getLayoutInflater();
             newView = inflater.inflate(R.layout.c_list, parent, false);
 
 
             //set what should be in this row:
+            provinceName.setText( covidList.get(position).getProv() );
+            dateD.setText( covidList.get(position).getDate() );
+            numCasesC.setText( covidList.get(position).getCases() );
 
-            String temp = covidList.get(position);
 
-            String tempProvince = "";
-            String tempDate = "";
-            String tempNumCases = "";
-
-            String[] arrSplit = temp.split(", ");
-            for (int i=0; i < arrSplit.length; i++)
-            {
-               if (i == 0)
-                   tempProvince += arrSplit[0];
-               if (i == 1)
-                   tempDate += arrSplit[1];
-               if (i == 2)
-                   tempNumCases += arrSplit[2];
-            }
-
-            provinceName.setText(tempProvince);
-            dateD.setText(tempDate);
-            numCasesC.setText(tempNumCases);
 
             //return it to be put in the table
             return newView;
-
         }
 
     } //End of Base adapter class
+
+    //inner class CovidEntry
+    public static class CovidEntry {
+        private String prov;
+        private String date;
+        private int cases;
+
+        public CovidEntry(String prov, String date, int cases) {
+            this.prov = prov;
+            this.date = date;
+            this.cases = cases;
+        }
+
+        public String getProv() { return this.prov; }
+
+        public String getDate() { return this.date; }
+
+        public int getCases() { return this.cases; }
+
+    }
+
 
 } //End of CovidQuery class

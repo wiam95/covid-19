@@ -7,12 +7,12 @@
     android:orientation="vertical"
     tools:context=".CovidQuery">
 
-   <TextView
-       android:id="@+id/testingSucks"
+   <Button
+       android:id="@+id/refreshList"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:textSize="40dp"
-       android:text="this sucks" />
+       android:textSize="25dp"
+       android:text="Refresh" />
 
    <ListView
     android:id="@+id/covidListView"
