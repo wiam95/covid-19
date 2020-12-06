@@ -7,9 +7,18 @@
     android:orientation="vertical"
     tools:context=".CovidQuery">
 
-    <ListView
-        android:id="@+id/covidListView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+   <TextView
+       android:id="@+id/testingSucks"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textSize="40dp"
+       android:text="this sucks" />
+
+   <ListView
+    android:id="@+id/covidListView"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp" />
+
+
 
 </LinearLayout>
