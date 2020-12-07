@@ -9,8 +9,6 @@ public class CovidEntry {
         this.prov = prov;
         this.date = date;
         this.cases = cases;
-
-
     }
 
     public String getProv() { return this.prov; }

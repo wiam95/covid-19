@@ -38,7 +38,7 @@ public class CovidQuery extends AppCompatActivity {
     //ProgressBar progressBar;
 
     private ArrayList<CovidEntry> covidList = new ArrayList<>();
-    private ArrayList<CovidEntry> savedList = new ArrayList<>();
+    ArrayList<CovidEntry> savedList = new ArrayList<>();
 
     private MyListAdapter myAdapter;
 
@@ -247,6 +247,5 @@ public class CovidQuery extends AppCompatActivity {
         }
 
     } //End of Base adapter class
-
 
 } //End of CovidQuery class
