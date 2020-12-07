@@ -88,8 +88,6 @@ public class CovidQuery extends AppCompatActivity {
             //Two lines of code to get AsyncTask going to retrieve data from a site
             CQuery req = new CQuery(); //Creates a background thread
             req.execute(searchQ); //Type 1
-
-
         });
 
 
@@ -168,9 +166,7 @@ public class CovidQuery extends AppCompatActivity {
                 String temp2 = covidList.get(i).getDate();
                 int temp3 = covidList.get(i).getCases();
             } //End of testing for loop ----
-
 */
-
         }
     } //End of CQuery class
 
@@ -202,6 +198,11 @@ public class CovidQuery extends AppCompatActivity {
             TextView pDate = newView.findViewById(R.id.provinceDate);
             pDate.setText( covidList.get(position).getDate() );
 
+            TextView pCases = newView.findViewById(R.id.provinceCases);
+            String cases = Integer.toString( covidList.get(position).getCases() );
+
+            pCases.setText( cases );
+
             /*
             TextView vProv = old.findViewById(R.id.provinceName);
             TextView vDate = old.findViewById(R.id.dateD);
@@ -229,6 +230,8 @@ public class CovidQuery extends AppCompatActivity {
             this.prov = prov;
             this.date = date;
             this.cases = cases;
+
+
         }
 
         public String getProv() { return this.prov; }
