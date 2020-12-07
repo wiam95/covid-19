@@ -89,8 +89,10 @@ public class CovidQuery extends AppCompatActivity {
             CQuery req = new CQuery(); //Creates a background thread
             req.execute(searchQ); //Type 1
 
-            myAdapter.notifyDataSetChanged();
+
         });
+
+
 
     } //End of onCreate method
 
@@ -157,16 +159,17 @@ public class CovidQuery extends AppCompatActivity {
             //progressBar.setVisibility(View.INVISIBLE);
             //super.onPostExecute(covidList);
 
+            myAdapter.notifyDataSetChanged();
 
             //This for loop is just for testing that JSON Parse was done right
-            /*
+/*
             for (int i = 0; i < covidList.size(); i++) {
                 String temp1 = covidList.get(i).getProv();
                 String temp2 = covidList.get(i).getDate();
                 int temp3 = covidList.get(i).getCases();
             } //End of testing for loop ----
-            */
 
+*/
 
         }
     } //End of CQuery class
@@ -194,8 +197,7 @@ public class CovidQuery extends AppCompatActivity {
             newView = inflater.inflate(R.layout.c_province, parent, false);
 
             TextView pText = newView.findViewById(R.id.provinceTextView);
-            //pText.setText(getItem(position));
-            pText.setText( covidList.get(position).getProv() );
+            pText.setText( covidList.get(position).getProv().toString() );
 
             TextView pDate = newView.findViewById(R.id.provinceDate);
             pDate.setText( covidList.get(position).getDate() );
