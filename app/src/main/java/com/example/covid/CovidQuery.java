@@ -40,9 +40,7 @@ public class CovidQuery extends AppCompatActivity {
     private MyListAdapter myAdapter;
 
     String searchQ, query1, query2, query3, query4;
-    TextView provinceName, dateD, numCasesC;
     ListView myList;
-    TextView provinceTextView;
 
     Button search;
 
@@ -53,11 +51,7 @@ public class CovidQuery extends AppCompatActivity {
         setContentView(R.layout.activity_covid_query);
 
         //Find the id
-        provinceName = findViewById(R.id.provinceName);
-        dateD = findViewById(R.id.dateD);
-        numCasesC = findViewById(R.id.numCasesC);
-        myList = findViewById(R.id.covidListView);
-        provinceTextView = findViewById(R.id.provinceTextView);
+        myList = findViewById(R.id.covidListView);;
         search = findViewById(R.id.refreshList);
 
         //progressBar.setVisibility(View.VISIBLE);
