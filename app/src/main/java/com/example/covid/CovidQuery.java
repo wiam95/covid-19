@@ -2,6 +2,7 @@ package com.example.covid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class CovidQuery extends AppCompatActivity {
     //ProgressBar progressBar;
 
     private ArrayList<CovidEntry> covidList = new ArrayList<>();
+    private ArrayList<CovidEntry> savedList = new ArrayList<>();
+
     private MyListAdapter myAdapter;
 
     String searchQ, query1, query2, query3, query4;
@@ -73,18 +76,50 @@ public class CovidQuery extends AppCompatActivity {
 
         //Putting together the query for the API needed to search
         searchQ = query1 + countryName + query2 + startDate + query3 + endDate + query4;
+        if (countryName == null || countryName.equals("")) {
+            searchQ = "https://api.covid19api.com/country/CANADA/status/confirmed/live?from=2020-10-14T00:00:00Z&to=2020-10-15T00:00:00Z";
+        }
 
         myList.setAdapter( (ListAdapter) ( myAdapter = new MyListAdapter() ) );
 
-        //Refresh button
+
+
+        //If you click on a message
+        myList.setOnItemLongClickListener((parent, view, position, id) -> {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Do you want to save this entry?")
+
+                    //What is the message:
+                    .setMessage("The selected row is " + position + "\nThe database id is " + id)
+
+                    //what the Yes button does:
+                    .setPositiveButton("Yes", (click, arg) -> {
+
+                       //Add this element to saved list
+                        savedList.add( covidList.get(position) );
+
+                    })
+
+                    //What the No button does:
+                    .setNegativeButton("No", (click, arg) -> {
+                    })
+
+                    //Show the dialog
+                    .create().show();
+
+            return true;
+
+        }); //End of if you click an item in the listView
+
+
+        //Search button
         search.setOnClickListener(click-> {
 
             //Two lines of code to get AsyncTask going to retrieve data from a site
             CQuery req = new CQuery(); //Creates a background thread
             req.execute(searchQ); //Type 1
-        });
-
-
+        }); //End of Search button
 
     } //End of onCreate method
 
@@ -214,22 +249,4 @@ public class CovidQuery extends AppCompatActivity {
     } //End of Base adapter class
 
 
-    //CovidEntry class
-    public static class CovidEntry {
-        private String prov;
-        private String date;
-        private int cases;
-
-        public CovidEntry(String prov, String date, int cases) {
-            this.prov = prov;
-            this.date = date;
-            this.cases = cases;
-
-
-        }
-
-        public String getProv() { return this.prov; }
-        public String getDate() { return this.date; }
-        public int getCases() { return this.cases; }
-    }
 } //End of CovidQuery class
