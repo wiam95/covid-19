@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,10 +43,13 @@ public class CovidQuery extends AppCompatActivity {
 
     private MyListAdapter myAdapter;
 
+    MyOpener myOpener;
+
     String searchQ, query1, query2, query3, query4;
     ListView myList;
 
     Button search;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,8 @@ public class CovidQuery extends AppCompatActivity {
         //Find the id
         myList = findViewById(R.id.covidListView);;
         search = findViewById(R.id.refreshList);
+
+        myOpener = new MyOpener(this);
 
         //progressBar.setVisibility(View.VISIBLE);
 
@@ -99,6 +105,9 @@ public class CovidQuery extends AppCompatActivity {
                        //Add this element to saved list
                         savedList.add( covidList.get(position) );
 
+                        //Adds this entry to the database
+                        addData(position);
+
                     })
 
                     //What the No button does:
@@ -122,6 +131,21 @@ public class CovidQuery extends AppCompatActivity {
         }); //End of Search button
 
     } //End of onCreate method
+
+    public void addData(int position) {
+
+       boolean isSaved;
+
+       isSaved = myOpener.insertEntry( covidList.get(position).getProv(),
+                covidList.get(position).getDate(), covidList.get(position).getCases() );
+
+       if (isSaved) {
+           Toast.makeText(CovidQuery.this, getResources().getString(R.string.db_success) , Toast.LENGTH_SHORT).show();
+       }else {
+           Toast.makeText(CovidQuery.this, getResources().getString(R.string.db_failure) , Toast.LENGTH_SHORT).show();
+       }
+
+    }
 
     //Type 1, Type 2, Type 3
     public class CQuery extends AsyncTask< String, Integer, ArrayList<CovidEntry> > {
@@ -164,8 +188,9 @@ public class CovidQuery extends AppCompatActivity {
                     String covidDate = currentObj.getString("Date");
                     int covidCases = currentObj.getInt("Cases");
 
+                    String covidC = Integer.toString(covidCases);
 
-                    covidList.add( new CovidEntry(covidProvince, covidDate, covidCases) );
+                    covidList.add( new CovidEntry(covidProvince, covidDate, covidC) );
                 }
 
             }catch (Exception e) { }
@@ -218,7 +243,7 @@ public class CovidQuery extends AppCompatActivity {
             View newView;
 
             LayoutInflater inflater = getLayoutInflater();
-            //old = inflater.inflate(R.layout.c_province, parent, false);
+
             newView = inflater.inflate(R.layout.c_province, parent, false);
 
             TextView pText = newView.findViewById(R.id.provinceTextView);
@@ -228,20 +253,9 @@ public class CovidQuery extends AppCompatActivity {
             pDate.setText( covidList.get(position).getDate() );
 
             TextView pCases = newView.findViewById(R.id.provinceCases);
-            String cases = Integer.toString( covidList.get(position).getCases() );
+            String cases = covidList.get(position).getCases();
 
             pCases.setText( cases );
-
-            /*
-            TextView vProv = old.findViewById(R.id.provinceName);
-            TextView vDate = old.findViewById(R.id.dateD);
-            TextView vCases = old.findViewById(R.id.numCasesC);
-
-            vProv.setText(covidList.get(position).getProv());
-            vDate.setText( covidList.get(position).getDate() );
-            vCases.setText( covidList.get(position).getCases() );
-            */
-            //return old;
 
             return newView;
         }

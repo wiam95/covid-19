@@ -32,7 +32,7 @@ public class MyOpener extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COL_PROVINCE + " text,"
                 + COL_DATE + " text,"
-                + COL_CASES + " integer);");
+                + COL_CASES + " text);");
 
     }
 
@@ -59,7 +59,7 @@ public class MyOpener extends SQLiteOpenHelper {
     }
 
     //Add data to table
-    public long insertMessage(String province, String date, int numCases) {
+    public boolean insertEntry(String province, String date, String numCases) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -68,9 +68,13 @@ public class MyOpener extends SQLiteOpenHelper {
         contentValues.put(COL_DATE, date);
         contentValues.put(COL_CASES, numCases);
 
-        long result = db.insert("SAVEDENTRIES", null, contentValues);
+        long id = db.insert("SAVEDENTRIES", null, contentValues);
 
-        return result;
+        if (id == -1) {
+            return false;
+        }else {
+            return true;
+        }
 
     }
 
@@ -91,6 +95,18 @@ public class MyOpener extends SQLiteOpenHelper {
 
         return cursor;
     }
+
+    //Get the data
+    public Cursor getData() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query, null);
+
+        return data;
+    }
+
 
     //(used for debug purposes)
     public void printCursor() {

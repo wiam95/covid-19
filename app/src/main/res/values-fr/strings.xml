@@ -5,4 +5,6 @@
     <string name="fromDate">" partir de la date"</string>
     <string name="toDate">" à ce jour"</string>
     <string name="search">Chercher</string>
+    <string name="db_success">ajoute avec succes</string>
+    <string name="db_failure">" echec d'ajout"</string>
 </resources>
