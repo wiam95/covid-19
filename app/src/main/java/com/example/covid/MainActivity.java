@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         //shared preferences
         prefs = getSharedPreferences("fileName", MODE_PRIVATE);
 
-        String savedCountry = prefs.getString("CName", "Country Name");
-        String date1 = prefs.getString("Date1", "2020-01-10");
-        String date2 = prefs.getString("Date2", "2020-11-25");
+        String savedCountry = prefs.getString("CName", "Canada");
+        String date1 = prefs.getString("Date1", "2020-10-14");
+        String date2 = prefs.getString("Date2", "2020-10-15");
 
         search = findViewById(R.id.search);
         countryName = (EditText) findViewById(R.id.countryNamePrompt);

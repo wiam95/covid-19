@@ -20,6 +20,7 @@ import android.widget.BaseAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -43,7 +44,7 @@ public class CovidQuery extends AppCompatActivity {
     ListView myList;
     TextView provinceTextView;
 
-    Button refreshList;
+    Button search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,7 @@ public class CovidQuery extends AppCompatActivity {
         numCasesC = findViewById(R.id.numCasesC);
         myList = findViewById(R.id.covidListView);
         provinceTextView = findViewById(R.id.provinceTextView);
-
-        refreshList = findViewById(R.id.refreshList);
+        search = findViewById(R.id.refreshList);
 
         //progressBar.setVisibility(View.VISIBLE);
 
@@ -80,18 +80,17 @@ public class CovidQuery extends AppCompatActivity {
         //Putting together the query for the API needed to search
         searchQ = query1 + countryName + query2 + startDate + query3 + endDate + query4;
 
-        //Two lines of code to get AsyncTask going to retrieve data from a site
-        CQuery req = new CQuery(); //Creates a background thread
-        req.execute(searchQ); //Type 1
-
         myList.setAdapter( (ListAdapter) ( myAdapter = new MyListAdapter() ) );
 
         //Refresh button
-        refreshList.setOnClickListener(click-> {
+        search.setOnClickListener(click-> {
+
+            //Two lines of code to get AsyncTask going to retrieve data from a site
+            CQuery req = new CQuery(); //Creates a background thread
+            req.execute(searchQ); //Type 1
+
             myAdapter.notifyDataSetChanged();
         });
-
-
 
     } //End of onCreate method
 
@@ -104,15 +103,12 @@ public class CovidQuery extends AppCompatActivity {
 
                 //Create URL object of what server to contact
                 URL url = new URL(args[0]);
-
                 //Open the connection
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
                 //wait for data:
                 InputStream response = urlConnection.getInputStream();
 
                 //JSON --------------------
-
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"));
                 StringBuilder sb = new StringBuilder();
 
@@ -139,21 +135,18 @@ public class CovidQuery extends AppCompatActivity {
                     String covidDate = currentObj.getString("Date");
                     int covidCases = currentObj.getInt("Cases");
 
+
                     covidList.add( new CovidEntry(covidProvince, covidDate, covidCases) );
                 }
 
-
             }catch (Exception e) { }
 
-            //province.add("InsideDoInBackground");
-            //cases.add(2);
             return covidList;
         }
 
         //(Where you update your GUI)
         //Type 2
         public void onProgressUpdate(Integer ... args) {
-
            // progressBar.setVisibility(View.VISIBLE);
             //SystemClock.sleep(300);
            // progressBar.setProgress(args[0]);
@@ -161,24 +154,31 @@ public class CovidQuery extends AppCompatActivity {
 
         //Type 3
         public void onPostExecute(ArrayList<CovidEntry> covidList) {
-
             //progressBar.setVisibility(View.INVISIBLE);
-
             //super.onPostExecute(covidList);
 
 
-        }
+            //This for loop is just for testing that JSON Parse was done right
+            /*
+            for (int i = 0; i < covidList.size(); i++) {
+                String temp1 = covidList.get(i).getProv();
+                String temp2 = covidList.get(i).getDate();
+                int temp3 = covidList.get(i).getCases();
+            } //End of testing for loop ----
+            */
 
+
+        }
     } //End of CQuery class
 
-
+    //MyListAdapter class
     private class MyListAdapter extends BaseAdapter {
 
         public int getCount() {
             return covidList.size();
         } //Size of arrayList
 
-        public CovidEntry getItem(int position) { return covidList.get(position); } //Gets the item
+        public ArrayList<CovidEntry> getItem(int position) { return covidList; } //Gets the item
 
         public long getItemId(int position) {
             return position;
@@ -190,25 +190,34 @@ public class CovidQuery extends AppCompatActivity {
             View newView;
 
             LayoutInflater inflater = getLayoutInflater();
-            newView = inflater.inflate(R.layout.c_list, parent, false);
+            //old = inflater.inflate(R.layout.c_province, parent, false);
+            newView = inflater.inflate(R.layout.c_province, parent, false);
 
+            TextView pText = newView.findViewById(R.id.provinceTextView);
+            //pText.setText(getItem(position));
+            pText.setText( covidList.get(position).getProv() );
 
-            TextView prov = findViewById(R.id.provinceTextView);
+            TextView pDate = newView.findViewById(R.id.provinceDate);
+            pDate.setText( covidList.get(position).getDate() );
 
-            //set what should be in this row:
-            provinceName.setText( covidList.get(position).getProv() );
-            dateD.setText( covidList.get(position).getDate() );
-            numCasesC.setText( covidList.get(position).getCases() );
+            /*
+            TextView vProv = old.findViewById(R.id.provinceName);
+            TextView vDate = old.findViewById(R.id.dateD);
+            TextView vCases = old.findViewById(R.id.numCasesC);
 
+            vProv.setText(covidList.get(position).getProv());
+            vDate.setText( covidList.get(position).getDate() );
+            vCases.setText( covidList.get(position).getCases() );
+            */
+            //return old;
 
-            //return it to be put in the table
             return newView;
         }
 
     } //End of Base adapter class
 
 
-    //inner class CovidEntry
+    //CovidEntry class
     public static class CovidEntry {
         private String prov;
         private String date;
@@ -221,12 +230,7 @@ public class CovidQuery extends AppCompatActivity {
         }
 
         public String getProv() { return this.prov; }
-
         public String getDate() { return this.date; }
-
         public int getCases() { return this.cases; }
-
     }
-
-
 } //End of CovidQuery class
