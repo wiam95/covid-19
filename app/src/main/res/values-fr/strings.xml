@@ -7,4 +7,6 @@
     <string name="search">Chercher</string>
     <string name="db_success">ajoute avec succes</string>
     <string name="db_failure">" echec d'ajout"</string>
+    <string name="open">ouvrez</string>
+    <string name="close">fermez</string>
 </resources>

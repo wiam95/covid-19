@@ -1,6 +1,9 @@
 package com.example.covid;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -19,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -59,6 +64,7 @@ public class CovidQuery extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_covid_query);
+        //setContentView(R.layout.activity_test_toolbar);
 
         //Find the id
         myList = findViewById(R.id.covidListView);;
@@ -66,6 +72,25 @@ public class CovidQuery extends AppCompatActivity {
 
         myOpener = new MyOpener(this);
 
+
+
+
+
+       //Setting up toolbar
+  //      Toolbar myTbar = findViewById(R.id.toolbar);
+  //      setSupportActionBar(myTbar);
+/*
+        //For NavigationDrawer:
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, myTbar, R.string.open, R.string.close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+*/
         //progressBar.setVisibility(View.VISIBLE);
 
         //Part of the API link (part that the user does not alter)

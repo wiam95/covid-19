@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button search;
+    Button search, goToSavedEntries;
     EditText countryName, fromDate, toDate;
 
     public static final String ACTIVITY_NAME = "MAIN_ACTIVITY";
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         String date2 = prefs.getString("Date2", "2020-10-15");
 
         search = findViewById(R.id.search);
+        goToSavedEntries = findViewById(R.id.goToSavedEntries);
         countryName = (EditText) findViewById(R.id.countryNamePrompt);
         fromDate = (EditText) findViewById(R.id.fromDatePrompt);
         toDate = (EditText) findViewById(R.id.toDatePrompt);
@@ -56,6 +57,17 @@ public class MainActivity extends AppCompatActivity {
 
             startActivity(covidPage);
         });
+
+        //This creates a transition to load CovidQuery
+        Intent savedEntriesPage = new Intent(this, SavedEntries.class);
+
+        //When you click the search button, start the next activity
+        goToSavedEntries.setOnClickListener( click ->
+        {
+            startActivity(savedEntriesPage);
+        });
+
+
 
     }
 

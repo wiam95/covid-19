@@ -24,8 +24,6 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
         setContentView(R.layout.activity_test_toolbar);
 
 
-        //(Before this code below we also added two lines into ...
-        //... values>styles.xml the last 2 codes
         //This gets the toolbar from the layout
         Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
 
@@ -43,8 +41,6 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
     }
 

@@ -6,4 +6,6 @@
     <string name="search">Search</string>
     <string name="db_success">Added to DB</string>
     <string name="db_failure">Failed to add to DB</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

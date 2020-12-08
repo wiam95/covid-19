@@ -4,24 +4,25 @@
 
     <item android:id="@+id/item1"
         android:title="ChatPage"
-        android:icon="@drawable/cart"
+        android:icon="@drawable/music"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item android:id="@+id/item2"
         android:title="WeatherForcast"
-        android:icon="@drawable/credit"
+        android:icon="@drawable/recipe"
         android:orderInCategory="51"
         app:showAsAction="always" />
 
     <item android:id="@+id/item3"
         android:title="LoginPage"
-        android:icon="@drawable/handshake"
+        android:icon="@drawable/page"
         android:orderInCategory="20"
         app:showAsAction="always" />
 
     <item android:id="@+id/item4"
-        android:title="Item4"
+        android:title="SavedEntries"
+        android:icon="@drawable/save"
         android:orderInCategory="400"
         app:showAsAction="never" />
 

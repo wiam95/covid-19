@@ -84,8 +84,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toDate"
         android:paddingTop="10dp"
-        android:text="@string/search"
+        android:text="submit"
         android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/goToSavedEntries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
+        android:text="saved entries" />
 
 
 </RelativeLayout>
