@@ -42,8 +42,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-
-
 public class CovidQuery extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //https://api.covid19api.com/country/CANADA/status/confirmed/live?from=2020-10-14T00:00:00Z&to=2020-10-15T00:00:00Z
@@ -68,7 +66,6 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_covid_query);
-        //setContentView(R.layout.activity_test_toolbar);
 
         //Find the id
         myList = findViewById(R.id.covidListView);;
@@ -82,12 +79,10 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         //This loads the toolbar, which calls onCreateOptionsMenu below:
         setSupportActionBar(tBar); //This makes Android call onCreateOptionsMenu()
 
-
         //For NavigationDrawer:
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawer, tBar,R.string.open, R.string.close);
-
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -364,7 +359,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
             newView = inflater.inflate(R.layout.c_province, parent, false);
 
             TextView pText = newView.findViewById(R.id.provinceTextView);
-            pText.setText( covidList.get(position).getProv().toString() );
+            pText.setText( covidList.get(position).getProv() );
 
             TextView pDate = newView.findViewById(R.id.provinceDate);
             pDate.setText( covidList.get(position).getDate() );

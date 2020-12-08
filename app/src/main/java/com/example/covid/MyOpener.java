@@ -78,6 +78,7 @@ public class MyOpener extends SQLiteOpenHelper {
 
     }
 
+
     //Remove row of information
     public void removeRow(int position) {
 

@@ -19,10 +19,11 @@ public class SavedEntries extends AppCompatActivity {
 
     MyOpener myOpener;
 
-    private ArrayList<CovidEntry> dbData = new ArrayList<>();
+    ArrayList<CovidEntry> dbData = new ArrayList<>();
 
     private MyListAdapter myAdapter;
 
+    TextView savedListTitle;
     ListView databaseList;
 
     @Override
@@ -30,12 +31,15 @@ public class SavedEntries extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_entries);
 
-        databaseList.findViewById(R.id.databaseList);
+        savedListTitle = findViewById(R.id.savedListTitle);
+        databaseList = findViewById(R.id.savedList);
+
         myOpener = new MyOpener(this);
 
         databaseList.setAdapter( (ListAdapter) ( myAdapter = new SavedEntries.MyListAdapter() ) );
 
         fillListView();
+
 
 
         //If you click on a message
@@ -49,7 +53,11 @@ public class SavedEntries extends AppCompatActivity {
                     .setPositiveButton("Yes", (click, arg) -> {
 
                         //Remove this entry
-                        dbData.remove(position); //(testing) I do not think I am removing properly
+                        dbData.remove(position); //Removes from the arrayList
+
+                        myOpener.removeRow(position); //Removes from the database
+
+                        myAdapter.notifyDataSetChanged(); //Notifies the list that a change has occurred
 
                     })
 
@@ -63,6 +71,7 @@ public class SavedEntries extends AppCompatActivity {
             return true;
 
         }); //End of if you click an item in the listView
+
 
 
 
@@ -96,9 +105,12 @@ public class SavedEntries extends AppCompatActivity {
 
         public ArrayList<CovidEntry> getItem(int position) { return dbData; } //Gets the item
 
+        //Gets the ID for the item
         public long getItemId(int position) {
+
             return position;
-        } //Gets the ID for the item
+
+        }
 
         //The view
         public View getView(int position, View old, ViewGroup parent) {
@@ -110,7 +122,7 @@ public class SavedEntries extends AppCompatActivity {
             newView = inflater.inflate(R.layout.c_province, parent, false);
 
             TextView pText = newView.findViewById(R.id.provinceTextView);
-            pText.setText( dbData.get(position).getProv().toString() );
+            pText.setText( dbData.get(position).getProv() );
 
             TextView pDate = newView.findViewById(R.id.provinceDate);
             pDate.setText( dbData.get(position).getDate() );
