@@ -68,14 +68,12 @@ public class MyOpener extends SQLiteOpenHelper {
         contentValues.put(COL_DATE, date);
         contentValues.put(COL_CASES, numCases);
 
-        long id = db.insert("SAVEDENTRIES", null, contentValues);
+        long entryID = db.insert("SAVEDENTRIES", null, contentValues);
 
-        if (id == -1) {
+        if (entryID == -1) {
             return false;
-        }else {
-            return true;
         }
-
+        return true;
     }
 
 

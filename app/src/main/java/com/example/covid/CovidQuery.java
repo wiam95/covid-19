@@ -325,14 +325,6 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
 
             myAdapter.notifyDataSetChanged();
 
-            //This for loop is just for testing that JSON Parse was done right
-/*
-            for (int i = 0; i < covidList.size(); i++) {
-                String temp1 = covidList.get(i).getProv();
-                String temp2 = covidList.get(i).getDate();
-                int temp3 = covidList.get(i).getCases();
-            } //End of testing for loop ----
-*/
         }
     } //End of CQuery class
 
