@@ -23,7 +23,7 @@ public class SavedEntries extends AppCompatActivity {
 
     private MyListAdapter myAdapter;
 
-    private ListView databaseList;
+    ListView databaseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,6 @@ public class SavedEntries extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Do you want to delete this entry?")
 
-                    //What is the message:
-                    .setMessage("The selected row is " + position + "\nThe database id is " + id)
 
                     //what the Yes button does:
                     .setPositiveButton("Yes", (click, arg) -> {

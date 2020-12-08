@@ -32,6 +32,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+
+
+
 public class CovidQuery extends AppCompatActivity {
 
     //https://api.covid19api.com/country/CANADA/status/confirmed/live?from=2020-10-14T00:00:00Z&to=2020-10-15T00:00:00Z
@@ -95,9 +98,6 @@ public class CovidQuery extends AppCompatActivity {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Do you want to save this entry?")
-
-                    //What is the message:
-                    .setMessage("The selected row is " + position + "\nThe database id is " + id)
 
                     //what the Yes button does:
                     .setPositiveButton("Yes", (click, arg) -> {

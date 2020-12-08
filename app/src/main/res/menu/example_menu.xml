@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/item1"
+        android:title="ChatPage"
+        android:icon="@drawable/cart"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/item2"
+        android:title="WeatherForcast"
+        android:icon="@drawable/credit"
+        android:orderInCategory="51"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/item3"
+        android:title="LoginPage"
+        android:icon="@drawable/handshake"
+        android:orderInCategory="20"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/item4"
+        android:title="Item4"
+        android:orderInCategory="400"
+        app:showAsAction="never" />
+
+
+
+
+
+</menu>
