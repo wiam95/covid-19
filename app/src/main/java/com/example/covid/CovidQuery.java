@@ -3,6 +3,7 @@ package com.example.covid;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
@@ -11,6 +12,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -40,7 +44,7 @@ import java.util.ArrayList;
 
 
 
-public class CovidQuery extends AppCompatActivity {
+public class CovidQuery extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //https://api.covid19api.com/country/CANADA/status/confirmed/live?from=2020-10-14T00:00:00Z&to=2020-10-15T00:00:00Z
 
@@ -72,25 +76,28 @@ public class CovidQuery extends AppCompatActivity {
 
         myOpener = new MyOpener(this);
 
+        //This gets the toolbar from the layout
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar); //This makes Android call onCreateOptionsMenu()
 
 
-
-
-       //Setting up toolbar
-  //      Toolbar myTbar = findViewById(R.id.toolbar);
-  //      setSupportActionBar(myTbar);
-/*
         //For NavigationDrawer:
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawer, myTbar, R.string.open, R.string.close);
+                drawer, tBar,R.string.open, R.string.close);
+
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-*/
+
+
+
+
         //progressBar.setVisibility(View.VISIBLE);
 
         //Part of the API link (part that the user does not alter)
@@ -156,6 +163,91 @@ public class CovidQuery extends AppCompatActivity {
         }); //End of Search button
 
     } //End of onCreate method
+
+
+
+    @Override //Gets called when I used setSupportActionBar() to inflate the menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.example_menu, menu);
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.item1:
+                message = "You clicked music task";
+                break;
+            case R.id.item2:
+                message = "You clicked recipe task";
+                break;
+            case R.id.item3:
+
+                message = "You clicked go to Main Activity";
+
+                //This creates a transition to load CovidQuery
+                Intent mainPage = new Intent(this, MainActivity.class);
+                startActivity(mainPage);
+
+                break;
+            case R.id.item4:
+                message = "You clicked saved entries";
+                break;
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+        return true;
+    }
+
+
+
+    // Needed for the OnNavigationItemSelected interface:
+    //When someone clicks on an item on the navigation drawer
+    public boolean onNavigationItemSelected( MenuItem item) {
+
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.item1:
+                //message = "You clicked cart";
+                Intent mainPage = new Intent(this, MainActivity.class);
+                startActivity(mainPage);
+                break;
+            case R.id.item2:
+                //message = "You clicked credit card";
+                Intent weatherPage = new Intent(this, MainActivity.class);
+                startActivity(weatherPage);
+                break;
+            case R.id.item3:
+                //message = "You clicked handshake";
+                Intent loginPage = new Intent(this, MainActivity.class);
+                startActivity(loginPage);
+                break;
+            case R.id.item4:
+                message = "You clicked item 4";
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        if (message != null)
+            Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+
+
 
     public void addData(int position) {
 

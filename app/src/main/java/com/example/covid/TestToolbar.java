@@ -56,7 +56,7 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
     }
 
 
-    @Override
+    @Override //This is when an item on the menu bar is clicked
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
@@ -81,6 +81,7 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
     }
 
     // Needed for the OnNavigationItemSelected interface:
+    //When someone clicks on an item on the navigation drawer
     @Override
     public boolean onNavigationItemSelected( MenuItem item) {
 
@@ -95,7 +96,7 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.item2:
                 //message = "You clicked credit card";
-                Intent weatherPage = new Intent(this, SavedEntries.class);
+                Intent weatherPage = new Intent(this, MainActivity.class);
                 startActivity(weatherPage);
                 break;
             case R.id.item3:
