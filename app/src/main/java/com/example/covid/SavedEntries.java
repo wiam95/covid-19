@@ -1,21 +1,32 @@
 package com.example.covid;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class SavedEntries extends AppCompatActivity {
+public class SavedEntries extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     MyOpener myOpener;
 
@@ -35,6 +46,27 @@ public class SavedEntries extends AppCompatActivity {
         databaseList = findViewById(R.id.savedList);
 
         myOpener = new MyOpener(this);
+
+
+        //This gets the toolbar from the layout
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar); //This makes Android call onCreateOptionsMenu()
+
+        //For NavigationDrawer:
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar,R.string.open, R.string.close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
 
         databaseList.setAdapter( (ListAdapter) ( myAdapter = new SavedEntries.MyListAdapter() ) );
 
@@ -72,10 +104,100 @@ public class SavedEntries extends AppCompatActivity {
 
         }); //End of if you click an item in the listView
 
-
-
-
     } //End of onCreate method
+
+
+    @Override //Gets called when I used setSupportActionBar() to inflate the menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.example_menu, menu);
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.item1:
+                message = "You clicked music task";
+                break;
+
+            case R.id.item2:
+                message = "You clicked recipe task";
+                break;
+
+            case R.id.item3:
+                message = "You clicked go to main activity";
+                //This creates a transition to load CovidQuery
+                Intent mainPage = new Intent(this, MainActivity.class);
+                startActivity(mainPage);
+                break;
+
+            case R.id.item4:
+                message = "You clicked go to saved entries";
+                Intent savedPage = new Intent(this, SavedEntries.class);
+                startActivity(savedPage);
+                break;
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+        return true;
+    }
+
+
+
+    // Needed for the OnNavigationItemSelected interface:
+    //When someone clicks on an item on the navigation drawer
+    public boolean onNavigationItemSelected( MenuItem item) {
+
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.item1:
+                //message = "You clicked cart";
+                Intent mainPage = new Intent(this, MainActivity.class);
+                startActivity(mainPage);
+                break;
+
+            case R.id.item2:
+                //message = "You clicked credit card";
+                Intent weatherPage = new Intent(this, MainActivity.class);
+                startActivity(weatherPage);
+                break;
+
+            case R.id.item3:
+                message = "You clicked go to main activity";
+                Intent loginPage = new Intent(this, MainActivity.class);
+                startActivity(loginPage);
+                break;
+
+            case R.id.item4:
+                message = "You clicked go to saved entries";
+                Intent savedPage = new Intent(this, SavedEntries.class);
+                startActivity(savedPage);
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        if (message != null)
+            Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+
+
+
+
 
     private void fillListView() {
 

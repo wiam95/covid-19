@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
+    @Override //What to do when you click on an item from the toolbar
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
@@ -122,14 +122,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.item1:
                 message = "You clicked music task";
                 break;
+
             case R.id.item2:
                 message = "You clicked recipe task";
                 break;
+
             case R.id.item3:
-                message = "You are already in Main Activity";
+                message = "You clicked go to main activity";
+                Intent mainPage = new Intent(this, MainActivity.class);
+                startActivity(mainPage);
                 break;
+
             case R.id.item4:
-                message = "You clicked saved entries";
+                message = "You clicked go to saved entries";
+                Intent savedPage = new Intent(this, SavedEntries.class);
+                startActivity(savedPage);
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -151,18 +158,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent mainPage = new Intent(this, MainActivity.class);
                 startActivity(mainPage);
                 break;
+
             case R.id.item2:
                 //message = "You clicked credit card";
                 Intent weatherPage = new Intent(this, MainActivity.class);
                 startActivity(weatherPage);
                 break;
+
             case R.id.item3:
-                //message = "You clicked handshake";
+                message = "You clicked go to main activity";
                 Intent loginPage = new Intent(this, MainActivity.class);
                 startActivity(loginPage);
                 break;
+
             case R.id.item4:
-                message = "You clicked item 4";
+                message = "You clicked go to saved entries";
+                Intent savedPage = new Intent(this, SavedEntries.class);
+                startActivity(savedPage);
                 break;
         }
 

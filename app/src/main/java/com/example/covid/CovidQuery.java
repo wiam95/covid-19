@@ -224,12 +224,15 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(weatherPage);
                 break;
             case R.id.item3:
-                //message = "You clicked handshake";
+
+                message = "You clicked go to main activity";
                 Intent loginPage = new Intent(this, MainActivity.class);
                 startActivity(loginPage);
                 break;
             case R.id.item4:
-                message = "You clicked item 4";
+                message = "You clicked go to saved entries";
+                Intent savedPage = new Intent(this, SavedEntries.class);
+                startActivity(savedPage);
                 break;
         }
 
