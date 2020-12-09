@@ -51,6 +51,7 @@
         android:layout_below="@+id/covid19Title"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/countryName"
+        android:inputType="text"
         android:hint="country name"
         android:padding="10dp"
         android:textSize="25dp" />
