@@ -10,12 +10,15 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Button search, goToSavedEntries;
     EditText countryName, fromDate, toDate;
+
+    ProgressBar pbCovid;
 
     public static final String ACTIVITY_NAME = "MAIN_ACTIVITY";
 
@@ -62,15 +67,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String date1 = prefs.getString("Date1", "2020-10-14");
         String date2 = prefs.getString("Date2", "2020-10-15");
 
+        //Finds the xml by id
         search = findViewById(R.id.search);
         goToSavedEntries = findViewById(R.id.goToSavedEntries);
         countryName = (EditText) findViewById(R.id.countryNamePrompt);
         fromDate = (EditText) findViewById(R.id.fromDatePrompt);
         toDate = (EditText) findViewById(R.id.toDatePrompt);
+        pbCovid = (ProgressBar) findViewById(R.id.pbCovid);
 
         countryName.setText(savedCountry);
         fromDate.setText(date1);
         toDate.setText(date2);
+
+        //for the progressbar
+        pbCovid.setVisibility(View.INVISIBLE);
 
 
         //This creates a transition to load CovidQuery
@@ -86,6 +96,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             covidPage.putExtra("country", countryNamePrompt);
             covidPage.putExtra("dateStart", fromDatePrompt);
             covidPage.putExtra("dateEnd", toDatePrompt);
+
+            pbCovid.setVisibility(View.VISIBLE);
+            for (int i = 0; i < 100; i += 10) {
+                pbCovid.setProgress(i);
+                SystemClock.sleep(100);
+            }
+
 
             startActivity(covidPage);
         });

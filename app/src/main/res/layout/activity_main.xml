@@ -113,7 +113,17 @@
         android:layout_below="@+id/search"
         android:text="saved entries" />
 
-    </RelativeLayout>
+     <ProgressBar
+         android:id="@+id/pbCovid"
+         style="?android:attr/progressBarStyleHorizontal"
+         android:layout_width="300dp"
+         android:layout_height="20dp"
+         android:layout_below="@+id/goToSavedEntries"
+         android:layout_marginTop="125dp"
+         android:layout_marginLeft="50dp"
+         android:layout_marginRight="50dp"/>
+
+ </RelativeLayout>
 
         <!-- THIS IS WHAT IS WHAT POPS OUT FROM THE SIDE:-->
         <com.google.android.material.navigation.NavigationView
