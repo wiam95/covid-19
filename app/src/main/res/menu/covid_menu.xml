@@ -4,25 +4,25 @@
 
     <item android:id="@+id/item1"
         android:title="ChatPage"
-        android:icon="@drawable/music"
+        android:icon="@drawable/covidmusic"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item android:id="@+id/item2"
         android:title="WeatherForcast"
-        android:icon="@drawable/recipe"
+        android:icon="@drawable/covidrecipe"
         android:orderInCategory="51"
         app:showAsAction="always" />
 
     <item android:id="@+id/item3"
         android:title="LoginPage"
-        android:icon="@drawable/page"
+        android:icon="@drawable/covidpage"
         android:orderInCategory="20"
         app:showAsAction="always" />
 
     <item android:id="@+id/item4"
         android:title="SavedEntries"
-        android:icon="@drawable/save"
+        android:icon="@drawable/covidsave"
         android:orderInCategory="400"
         app:showAsAction="never" />
 

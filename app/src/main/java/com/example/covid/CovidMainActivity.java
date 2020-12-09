@@ -37,7 +37,7 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_covid_main);
 
         //This gets the toolbar from the layout
         Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
@@ -126,7 +126,7 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu, menu);
+        inflater.inflate(R.menu.covid_menu, menu);
 
         return true;
     }
@@ -140,11 +140,11 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
         {
             //what to do when the menu item is selected:
             case R.id.item1:
-                message = "You clicked music task";
+                message = "You clicked covidmusic task";
                 break;
 
             case R.id.item2:
-                message = "You clicked recipe task";
+                message = "You clicked covidrecipe task";
                 break;
 
             case R.id.item3:
@@ -168,10 +168,10 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
 
-                        //Message has the instructions for this page
+                        //Message has the instructions for this covidpage
                         .setMessage("Select a country, start date and end date that you wish to " +
                                 "search for then press submit. \nThis will redirect you to the next " +
-                                "page to present you the covid results for the data you entered.")
+                                "covidpage to present you the covid results for the data you entered.")
 
                         //what the Yes button does:
                         .setPositiveButton("Done", (click, arg) -> { })
@@ -226,10 +226,10 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
 
-                        //Message has the instructions for this page
+                        //Message has the instructions for this covidpage
                         .setMessage("Select a country, start date and end date that you wish to " +
                                 "search for then press submit. \nThis will redirect you to the next " +
-                                "page to present you the covid results for the data you entered.")
+                                "covidpage to present you the covid results for the data you entered.")
 
                         //what the Yes button does:
                         .setPositiveButton("Done", (click, arg) -> { })

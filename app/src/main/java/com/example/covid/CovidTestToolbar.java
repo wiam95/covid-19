@@ -21,7 +21,7 @@ public class CovidTestToolbar extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_toolbar);
+        setContentView(R.layout.activity_covid_test_toolbar);
 
 
         //This gets the toolbar from the layout
@@ -50,7 +50,7 @@ public class CovidTestToolbar extends AppCompatActivity implements NavigationVie
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu, menu);
+        inflater.inflate(R.menu.covid_menu, menu);
 
         return true;
     }

@@ -98,7 +98,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         //Gets you from MainActivity.java
         Intent intent = getIntent();
 
-        //Obtained from previous intent (page)
+        //Obtained from previous intent (covidpage)
         String countryName = intent.getStringExtra("country");
         String startDate = intent.getStringExtra("dateStart");
         String endDate = intent.getStringExtra("dateEnd");
@@ -118,7 +118,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         myList.setOnItemLongClickListener((parent, view, position, id) -> {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Do you want to save this entry?")
+            alertDialogBuilder.setTitle("Do you want to covidsave this entry?")
 
                     //what the Yes button does:
                     .setPositiveButton("Yes", (click, arg) -> {
@@ -159,7 +159,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu, menu);
+        inflater.inflate(R.menu.covid_menu, menu);
 
         return true;
     }
@@ -173,11 +173,11 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         {
             //what to do when the menu item is selected:
             case R.id.item1:
-                message = "You clicked music task";
+                message = "You clicked covidmusic task";
                 break;
 
             case R.id.item2:
-                message = "You clicked recipe task";
+                message = "You clicked covidrecipe task";
                 break;
 
             case R.id.item3:
@@ -199,10 +199,10 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
 
-                        //Message has the instructions for this page
+                        //Message has the instructions for this covidpage
                         .setMessage("Press the SEARCH button and the data you requested " +
                                 "will be displayed here using a list. \n\nIf you wish " +
-                                "to save an entry, click and hold an entry to save it to your " +
+                                "to covidsave an entry, click and hold an entry to covidsave it to your " +
                                 "SAVED ENTRIES list.")
 
                         //what the Yes button does:
@@ -257,10 +257,10 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
 
-                        //Message has the instructions for this page
+                        //Message has the instructions for this covidpage
                         .setMessage("Press the SEARCH button and the data you requested " +
                                 "will be displayed here using a list. \n\nIf you wish " +
-                                "to save an entry, click and hold an entry to save it to your " +
+                                "to covidsave an entry, click and hold an entry to covidsave it to your " +
                                 "SAVED ENTRIES list.")
 
                         //what the Yes button does:
@@ -387,7 +387,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
 
             LayoutInflater inflater = getLayoutInflater();
 
-            newView = inflater.inflate(R.layout.c_province, parent, false);
+            newView = inflater.inflate(R.layout.covid_province, parent, false);
 
             TextView pText = newView.findViewById(R.id.provinceTextView);
             pText.setText( covidList.get(position).getProv() );

@@ -40,7 +40,7 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_entries);
+        setContentView(R.layout.activity_covid_saved_entries);
 
         savedListTitle = findViewById(R.id.savedListTitle);
         databaseList = findViewById(R.id.savedList);
@@ -111,7 +111,7 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu, menu);
+        inflater.inflate(R.menu.covid_menu, menu);
 
         return true;
     }
@@ -125,11 +125,11 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
         {
             //what to do when the menu item is selected:
             case R.id.item1:
-                message = "You clicked music task";
+                message = "You clicked covidmusic task";
                 break;
 
             case R.id.item2:
-                message = "You clicked recipe task";
+                message = "You clicked covidrecipe task";
                 break;
 
             case R.id.item3:
@@ -151,7 +151,7 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
 
-                        //Message has the instructions for this page
+                        //Message has the instructions for this covidpage
                         .setMessage("These are your saved entries. If you wish to delete one, " +
                                 "click and hold the entry.")
 
@@ -209,7 +209,7 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
 
-                        //Message has the instructions for this page
+                        //Message has the instructions for this covidpage
                         .setMessage("These are your saved entries. If you wish to delete one, " +
                                 "click and hold the entry.")
 
@@ -279,7 +279,7 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
 
             LayoutInflater inflater = getLayoutInflater();
 
-            newView = inflater.inflate(R.layout.c_province, parent, false);
+            newView = inflater.inflate(R.layout.covid_province, parent, false);
 
             TextView pText = newView.findViewById(R.id.provinceTextView);
             pText.setText( dbData.get(position).getProv() );
