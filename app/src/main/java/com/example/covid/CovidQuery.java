@@ -181,20 +181,42 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
             case R.id.item1:
                 message = "You clicked music task";
                 break;
+
             case R.id.item2:
                 message = "You clicked recipe task";
                 break;
+
             case R.id.item3:
-
                 message = "You clicked go to Main Activity";
-
                 //This creates a transition to load CovidQuery
                 Intent mainPage = new Intent(this, MainActivity.class);
                 startActivity(mainPage);
-
                 break;
+
             case R.id.item4:
-                message = "You clicked saved entries";
+                message = "You clicked go to saved entries";
+                Intent savedPage = new Intent(this, SavedEntries.class);
+                startActivity(savedPage);
+                break;
+
+            case R.id.itemHelp:
+                message = "You clicked on help";
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Instructions")
+
+                        //Message has the instructions for this page
+                        .setMessage("Press the SEARCH button and the data you requested " +
+                                "will be displayed here using a list. \n\nIf you wish " +
+                                "to save an entry, click and hold an entry to save it to your " +
+                                "SAVED ENTRIES list.")
+
+                        //what the Yes button does:
+                        .setPositiveButton("Done", (click, arg) -> { })
+
+                        //Show the dialog
+                        .create().show();
+
                 break;
         }
 
@@ -234,13 +256,33 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
                 Intent savedPage = new Intent(this, SavedEntries.class);
                 startActivity(savedPage);
                 break;
+
+            case R.id.itemHelp:
+                message = "You clicked on help";
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Instructions")
+
+                        //Message has the instructions for this page
+                        .setMessage("Press the SEARCH button and the data you requested " +
+                                "will be displayed here using a list. \n\nIf you wish " +
+                                "to save an entry, click and hold an entry to save it to your " +
+                                "SAVED ENTRIES list.")
+
+                        //what the Yes button does:
+                        .setPositiveButton("Done", (click, arg) -> { })
+
+                        //Show the dialog
+                        .create().show();
+
+                break;
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
 
         if (message != null)
-            Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  message, Toast.LENGTH_SHORT).show();
         return false;
     }
 

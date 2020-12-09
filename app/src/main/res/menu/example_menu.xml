@@ -26,6 +26,11 @@
         android:orderInCategory="400"
         app:showAsAction="never" />
 
+    <item android:id="@+id/itemHelp"
+        android:title="Help"
+        android:orderInCategory="500"
+        app:showAsAction="never" />
+
 
 
 

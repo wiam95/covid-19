@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -138,6 +139,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent savedPage = new Intent(this, SavedEntries.class);
                 startActivity(savedPage);
                 break;
+
+            case R.id.itemHelp:
+                message = "You clicked on help";
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Instructions")
+
+                        //Message has the instructions for this page
+                        .setMessage("Select a country, start date and end date that you wish to " +
+                                "search for then press submit. \nThis will redirect you to the next " +
+                                "page to present you the covid results for the data you entered.")
+
+                        //what the Yes button does:
+                        .setPositiveButton("Done", (click, arg) -> { })
+
+                        //Show the dialog
+                        .create().show();
+
+            break;
+
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         return true;
@@ -176,13 +197,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent savedPage = new Intent(this, SavedEntries.class);
                 startActivity(savedPage);
                 break;
+
+            case R.id.itemHelp:
+                message = "You clicked on help";
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Instructions")
+
+                        //Message has the instructions for this page
+                        .setMessage("Select a country, start date and end date that you wish to " +
+                                "search for then press submit. \nThis will redirect you to the next " +
+                                "page to present you the covid results for the data you entered.")
+
+                        //what the Yes button does:
+                        .setPositiveButton("Done", (click, arg) -> { })
+
+                        //Show the dialog
+                        .create().show();
+
+                break;
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
 
         if (message != null)
-            Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         return false;
     }
 

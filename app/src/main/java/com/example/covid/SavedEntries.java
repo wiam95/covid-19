@@ -144,6 +144,24 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
                 Intent savedPage = new Intent(this, SavedEntries.class);
                 startActivity(savedPage);
                 break;
+
+            case R.id.itemHelp:
+                message = "You clicked on help";
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Instructions")
+
+                        //Message has the instructions for this page
+                        .setMessage("These are your saved entries. If you wish to delete one, " +
+                                "click and hold the entry.")
+
+                        //what the Yes button does:
+                        .setPositiveButton("Done", (click, arg) -> { })
+
+                        //Show the dialog
+                        .create().show();
+
+            break;
         }
 
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -184,13 +202,33 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
                 Intent savedPage = new Intent(this, SavedEntries.class);
                 startActivity(savedPage);
                 break;
+
+            case R.id.itemHelp:
+                message = "You clicked on help";
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Instructions")
+
+                        //Message has the instructions for this page
+                        .setMessage("These are your saved entries. If you wish to delete one, " +
+                                "click and hold the entry.")
+
+                        //what the Yes button does:
+                        .setPositiveButton("Done", (click, arg) -> { })
+
+                        //Show the dialog
+                        .create().show();
+
+            break;
+
+
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
 
         if (message != null)
-            Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         return false;
     }
 
