@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text=" Covid19 "
+        android:text="@string/covid19"
         android:textSize="40dp" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/countryName"
         android:inputType="text"
-        android:hint="country name"
+        android:hint="@string/countryName"
         android:padding="10dp"
         android:textSize="25dp" />
 
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toDate"
         android:paddingTop="10dp"
-        android:text="submit"
+        android:text="@string/submit"
         android:textSize="20dp" />
 
     <Button
@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search"
-        android:text="saved entries" />
+        android:text="@string/savedEntries" />
 
      <ProgressBar
          android:id="@+id/pbCovid"

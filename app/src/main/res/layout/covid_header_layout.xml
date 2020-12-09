@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Made by Wiam"
+        android:text="@string/madeBy"
         android:layout_alignParentBottom="true" />
     <TextView
         android:layout_width="match_parent"
@@ -19,6 +19,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Covid Task"
+        android:text="@string/task"
         android:layout_alignParentBottom="true" />
 </LinearLayout>

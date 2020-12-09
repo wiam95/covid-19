@@ -9,4 +9,9 @@
     <string name="db_failure">" echec d'ajout"</string>
     <string name="open">ouvrez</string>
     <string name="close">fermez</string>
+    <string name="submit">" soumettre"</string>
+    <string name="savedEntries">entrées enregistrées</string>
+    <string name="madeBy">" faite par Wiam"</string>
+    <string name="task">" Tâche Covid"</string>
+    <string name="cases">" cas:"</string>
 </resources>
