@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -97,14 +98,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             covidPage.putExtra("dateStart", fromDatePrompt);
             covidPage.putExtra("dateEnd", toDatePrompt);
 
+
+
+            //Done for the progressbar
             pbCovid.setVisibility(View.VISIBLE);
             for (int i = 0; i < 100; i += 10) {
                 pbCovid.setProgress(i);
                 SystemClock.sleep(100);
             }
-
-
             startActivity(covidPage);
+
         });
 
         //This creates a transition to load CovidQuery
@@ -159,6 +162,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.itemHelp:
                 message = "You clicked on help";
+
+                //Snackbar
+                Snackbar.make(search, "Click DONE to proceed", Snackbar.LENGTH_SHORT).show();
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
