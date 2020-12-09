@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,7 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class CovidMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     Button search, goToSavedEntries;
     EditText countryName, fromDate, toDate;
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         //This creates a transition to load CovidQuery
-        Intent savedEntriesPage = new Intent(this, SavedEntries.class);
+        Intent savedEntriesPage = new Intent(this, CovidSavedEntries.class);
 
         //When you click the search button, start the next activity
         goToSavedEntries.setOnClickListener( click ->
@@ -150,13 +149,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.item3:
                 message = "You clicked go to main activity";
-                Intent mainPage = new Intent(this, MainActivity.class);
+                Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item4:
                 message = "You clicked go to saved entries";
-                Intent savedPage = new Intent(this, SavedEntries.class);
+                Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
@@ -199,25 +198,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             case R.id.item1:
                 //message = "You clicked cart";
-                Intent mainPage = new Intent(this, MainActivity.class);
+                Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item2:
                 //message = "You clicked credit card";
-                Intent weatherPage = new Intent(this, MainActivity.class);
+                Intent weatherPage = new Intent(this, CovidMainActivity.class);
                 startActivity(weatherPage);
                 break;
 
             case R.id.item3:
                 message = "You clicked go to main activity";
-                Intent loginPage = new Intent(this, MainActivity.class);
+                Intent loginPage = new Intent(this, CovidMainActivity.class);
                 startActivity(loginPage);
                 break;
 
             case R.id.item4:
                 message = "You clicked go to saved entries";
-                Intent savedPage = new Intent(this, SavedEntries.class);
+                Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 

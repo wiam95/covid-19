@@ -10,19 +10,15 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
@@ -31,12 +27,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -53,7 +47,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
 
     private MyListAdapter myAdapter;
 
-    MyOpener myOpener;
+    CovidMyOpener covidMyOpener;
 
     String searchQ, query1, query2, query3, query4;
     ListView myList;
@@ -71,7 +65,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         myList = findViewById(R.id.covidListView);;
         search = findViewById(R.id.refreshList);
 
-        myOpener = new MyOpener(this);
+        covidMyOpener = new CovidMyOpener(this);
 
         //This gets the toolbar from the layout
         Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
@@ -189,13 +183,13 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
             case R.id.item3:
                 message = "You clicked go to Main Activity";
                 //This creates a transition to load CovidQuery
-                Intent mainPage = new Intent(this, MainActivity.class);
+                Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item4:
                 message = "You clicked go to saved entries";
-                Intent savedPage = new Intent(this, SavedEntries.class);
+                Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
@@ -237,23 +231,23 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         {
             case R.id.item1:
                 //message = "You clicked cart";
-                Intent mainPage = new Intent(this, MainActivity.class);
+                Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
             case R.id.item2:
                 //message = "You clicked credit card";
-                Intent weatherPage = new Intent(this, MainActivity.class);
+                Intent weatherPage = new Intent(this, CovidMainActivity.class);
                 startActivity(weatherPage);
                 break;
             case R.id.item3:
 
                 message = "You clicked go to main activity";
-                Intent loginPage = new Intent(this, MainActivity.class);
+                Intent loginPage = new Intent(this, CovidMainActivity.class);
                 startActivity(loginPage);
                 break;
             case R.id.item4:
                 message = "You clicked go to saved entries";
-                Intent savedPage = new Intent(this, SavedEntries.class);
+                Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
@@ -293,7 +287,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
 
        boolean isSaved;
 
-       isSaved = myOpener.insertEntry( covidList.get(position).getProv(),
+       isSaved = covidMyOpener.insertEntry( covidList.get(position).getProv(),
                 covidList.get(position).getDate(), covidList.get(position).getCases() );
 
        if (isSaved) {

@@ -16,7 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class TestToolbar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class CovidTestToolbar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,17 +91,17 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
         {
             case R.id.item1:
                 //message = "You clicked cart";
-                Intent chatPage = new Intent(this, MainActivity.class);
+                Intent chatPage = new Intent(this, CovidMainActivity.class);
                 startActivity(chatPage);
                 break;
             case R.id.item2:
                 //message = "You clicked credit card";
-                Intent weatherPage = new Intent(this, MainActivity.class);
+                Intent weatherPage = new Intent(this, CovidMainActivity.class);
                 startActivity(weatherPage);
                 break;
             case R.id.item3:
                 //message = "You clicked handshake";
-                Intent loginPage = new Intent(this, MainActivity.class);
+                Intent loginPage = new Intent(this, CovidMainActivity.class);
                 startActivity(loginPage);
                 break;
             case R.id.item4:

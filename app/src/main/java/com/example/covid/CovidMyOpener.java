@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class MyOpener extends SQLiteOpenHelper {
+public class CovidMyOpener extends SQLiteOpenHelper {
 
 
     protected final static String DATABASE_NAME = "SavedCovidEntries";
@@ -21,7 +21,7 @@ public class MyOpener extends SQLiteOpenHelper {
 
 
     //Constructor
-    public MyOpener(Context ctx) {
+    public CovidMyOpener(Context ctx) {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
 

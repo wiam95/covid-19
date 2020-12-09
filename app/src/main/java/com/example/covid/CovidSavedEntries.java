@@ -26,9 +26,9 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class SavedEntries extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class CovidSavedEntries extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    MyOpener myOpener;
+    CovidMyOpener covidMyOpener;
 
     ArrayList<CovidEntry> dbData = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
         savedListTitle = findViewById(R.id.savedListTitle);
         databaseList = findViewById(R.id.savedList);
 
-        myOpener = new MyOpener(this);
+        covidMyOpener = new CovidMyOpener(this);
 
 
         //This gets the toolbar from the layout
@@ -68,7 +68,7 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
 
 
 
-        databaseList.setAdapter( (ListAdapter) ( myAdapter = new SavedEntries.MyListAdapter() ) );
+        databaseList.setAdapter( (ListAdapter) ( myAdapter = new CovidSavedEntries.MyListAdapter() ) );
 
         fillListView();
 
@@ -87,7 +87,7 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
                         //Remove this entry
                         dbData.remove(position); //Removes from the arrayList
 
-                        myOpener.removeRow(position); //Removes from the database
+                        covidMyOpener.removeRow(position); //Removes from the database
 
                         myAdapter.notifyDataSetChanged(); //Notifies the list that a change has occurred
 
@@ -135,13 +135,13 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
             case R.id.item3:
                 message = "You clicked go to main activity";
                 //This creates a transition to load CovidQuery
-                Intent mainPage = new Intent(this, MainActivity.class);
+                Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item4:
                 message = "You clicked go to saved entries";
-                Intent savedPage = new Intent(this, SavedEntries.class);
+                Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
@@ -181,25 +181,25 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
         {
             case R.id.item1:
                 //message = "You clicked cart";
-                Intent mainPage = new Intent(this, MainActivity.class);
+                Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item2:
                 //message = "You clicked credit card";
-                Intent weatherPage = new Intent(this, MainActivity.class);
+                Intent weatherPage = new Intent(this, CovidMainActivity.class);
                 startActivity(weatherPage);
                 break;
 
             case R.id.item3:
                 message = "You clicked go to main activity";
-                Intent loginPage = new Intent(this, MainActivity.class);
+                Intent loginPage = new Intent(this, CovidMainActivity.class);
                 startActivity(loginPage);
                 break;
 
             case R.id.item4:
                 message = "You clicked go to saved entries";
-                Intent savedPage = new Intent(this, SavedEntries.class);
+                Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
@@ -239,7 +239,7 @@ public class SavedEntries extends AppCompatActivity implements NavigationView.On
 
     private void fillListView() {
 
-        Cursor data = myOpener.getData();
+        Cursor data = covidMyOpener.getData();
 
         while(data.moveToNext()) {
 
