@@ -3,19 +3,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/item1"
-        android:title="ChatPage"
+        android:title="Music"
         android:icon="@drawable/covidmusic"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item android:id="@+id/item2"
-        android:title="WeatherForcast"
+        android:title="Recipe"
         android:icon="@drawable/covidrecipe"
         android:orderInCategory="51"
         app:showAsAction="always" />
 
     <item android:id="@+id/item3"
-        android:title="LoginPage"
+        android:title="HomePage"
         android:icon="@drawable/covidpage"
         android:orderInCategory="20"
         app:showAsAction="always" />

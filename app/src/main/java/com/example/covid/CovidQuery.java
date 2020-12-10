@@ -36,11 +36,26 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
+/*
+Name: Wiam Assaad
+Student ID: 040905209
+Course & Section: CST2335 022
+Assignment: Final assignment Covid Task
+Due: Dec 11 2020
+*/
+
+
+
+/*
+    @Class: CovidQuery
+    @extends: AppCompatActivity
+    @implements: NavigationView.OnNavigationItemSelectedListener
+
+    This class handles the query, pulls the data from the site, and displays the data on a list
+ */
 public class CovidQuery extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //https://api.covid19api.com/country/CANADA/status/confirmed/live?from=2020-10-14T00:00:00Z&to=2020-10-15T00:00:00Z
-
-    //ProgressBar progressBar;
 
     private ArrayList<CovidEntry> covidList = new ArrayList<>();
     ArrayList<CovidEntry> savedList = new ArrayList<>();
@@ -55,6 +70,13 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
     Button search;
 
 
+    /*
+        @method: onCreate
+        @params: Bundle -saved instance state
+        @returns: no return value
+
+        This method is called when this class run for the first time
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -85,10 +107,6 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
-        //progressBar.setVisibility(View.VISIBLE);
-
         //Part of the API link (part that the user does not alter)
         query1 = "https://api.covid19api.com/country/";
         query2 = "/status/confirmed/live?from=";
@@ -118,7 +136,7 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         myList.setOnItemLongClickListener((parent, view, position, id) -> {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Do you want to covidsave this entry?")
+            alertDialogBuilder.setTitle("Save this entry?")
 
                     //what the Yes button does:
                     .setPositiveButton("Yes", (click, arg) -> {
@@ -148,14 +166,20 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
 
             //Two lines of code to get AsyncTask going to retrieve data from a site
             CQuery req = new CQuery(); //Creates a background thread
-            req.execute(searchQ); //Type 1
+            req.execute(searchQ); //Type 1 (This starts AsyncTask)
         }); //End of Search button
 
     } //End of onCreate method
 
 
+    /*
+       @method: onCreateOptionsMenu
+       @params: Menu
+       @return: boolean -returns true if the menu has inflated
 
-    @Override //Gets called when I used setSupportActionBar() to inflate the menu
+       This method is called when setSupportActionBar() is used to inflate the menu
+    */
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -164,7 +188,13 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         return true;
     }
 
+    /*
+        @method: onOptionsItemSelected
+        @params: MenuItem -The item on the toolbar that is selected
+        @return: boolean
 
+         This method handles what happens when an item on the toolbar is clicked
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
@@ -173,28 +203,28 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         {
             //what to do when the menu item is selected:
             case R.id.item1:
-                message = "You clicked covidmusic task";
+                message = "music";
                 break;
 
             case R.id.item2:
-                message = "You clicked covidrecipe task";
+                message = "recipe";
                 break;
 
             case R.id.item3:
-                message = "You clicked go to Main Activity";
+                message = "home";
                 //This creates a transition to load CovidQuery
                 Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item4:
-                message = "You clicked go to saved entries";
+                message = "saved entries";
                 Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
             case R.id.itemHelp:
-                message = "You clicked on help";
+                message = "help";
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
@@ -220,9 +250,13 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
     }
 
 
+    /*
+        @method: onNavigationItemSelected
+        @params: MenuItem   -The item that is selected on the navigation drawer
+        @return: boolean
 
-    // Needed for the OnNavigationItemSelected interface:
-    //When someone clicks on an item on the navigation drawer
+        This method handles what happens when an item on the navigation drawer is selected
+    */
     public boolean onNavigationItemSelected( MenuItem item) {
 
         String message = null;
@@ -230,29 +264,29 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         switch(item.getItemId())
         {
             case R.id.item1:
-                //message = "You clicked cart";
+                message = "music";
                 Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
             case R.id.item2:
-                //message = "You clicked credit card";
+                message = "recipe";
                 Intent weatherPage = new Intent(this, CovidMainActivity.class);
                 startActivity(weatherPage);
                 break;
             case R.id.item3:
 
-                message = "You clicked go to main activity";
+                message = "home";
                 Intent loginPage = new Intent(this, CovidMainActivity.class);
                 startActivity(loginPage);
                 break;
             case R.id.item4:
-                message = "You clicked go to saved entries";
+                message = "saved entries";
                 Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
             case R.id.itemHelp:
-                message = "You clicked on help";
+                message = "help";
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
@@ -280,9 +314,13 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         return false;
     }
 
+    /*
+        @method: addData
+        @params: int -position of the item in the arraylist
+        @return: no return value
 
-
-
+        This method adds an entry to the database
+     */
     public void addData(int position) {
 
        boolean isSaved;
@@ -298,9 +336,22 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
 
     }
 
-    //Type 1, Type 2, Type 3
+    /*
+        @Class: CQuery
+        @extends: AsyncTask< String, Integer, ArrayList<CovidEntry> >
+
+        This class handles the pulling of data from the site and saving the data to the arrayList
+     */
+                                             //Type 1, Type 2, Type 3
     public class CQuery extends AsyncTask< String, Integer, ArrayList<CovidEntry> > {
 
+        /*
+            @method: doInBackground
+            @params: (Strings... args)
+            @return: ArrayList<CovidEntry>
+
+            This method runs in the background and pulls the data from the site and stores it to the arraylist
+         */
         protected ArrayList<CovidEntry> doInBackground(String... args) {
 
             try {
@@ -349,14 +400,24 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
             return covidList;
         }
 
-        //(Where you update your GUI)
-        //Type 2
-        public void onProgressUpdate(Integer ... args) {
-           // progressBar.setVisibility(View.VISIBLE);
-            //SystemClock.sleep(300);
-           // progressBar.setProgress(args[0]);
-        }
+        /*
+            @method: onProgressUpdate
+            @params: Integer ... args
+            @return: no return value
 
+            This method is where you can update your GUI while doInBackground is happening
+         */
+        //Type 2
+        public void onProgressUpdate(Integer ... args) {  }
+
+
+        /*
+            @method: onPostExecute
+            @params: ArrayList<CovidEntry>
+            @returns: no return value
+
+            This method happens after doInBackground is done with its task
+         */
         //Type 3
         public void onPostExecute(ArrayList<CovidEntry> covidList) {
             //progressBar.setVisibility(View.INVISIBLE);
@@ -367,19 +428,54 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         }
     } //End of CQuery class
 
+
+    /*
+        @Class: MyListAdapter
+        @extends: BaseAdapter
+
+        This class handles how the our custom listview will appear
+     */
     //MyListAdapter class
     private class MyListAdapter extends BaseAdapter {
 
+        /*
+            @method: getCount
+            @return: int -size of the arrayList
+
+            This method returns the size of the arraylist to be displayed in the list
+         */
         public int getCount() {
             return covidList.size();
         } //Size of arrayList
 
+        /*
+            @method: getItem
+            @param: int -position in the arrayList
+            @returns: ArrayList<CovidEntry> -Returns an array list of type class Covid Entry
+
+            This method returns the data at that postion of the arraylist
+         */
         public ArrayList<CovidEntry> getItem(int position) { return covidList; } //Gets the item
 
+        /*
+            @method: getItemId
+            @params: int -position in the arraylist
+            @return: long -the id the of that position
+
+            This method returns the id of the item in that position of the arraylist
+        */
         public long getItemId(int position) {
             return position;
         } //Gets the ID for the item
 
+        /*
+            @method: getView
+            @params: int    -position of the item in the arraylist
+                     View   -The view
+                     ViewGroup -The viewgroup
+
+            This method handles how what data the listview will have in each entry
+         */
         //The view
         public View getView(int position, View old, ViewGroup parent) {
 

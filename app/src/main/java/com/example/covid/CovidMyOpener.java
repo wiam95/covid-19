@@ -7,6 +7,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+
+/*
+Name: Wiam Assaad
+Student ID: 040905209
+Course & Section: CST2335 022
+Assignment: Final assignment Covid Task
+Due: Dec 11 2020
+*/
+
+/*
+    @Class: CovidMyOpener
+    @Extends: SQLiteOpenHelper
+
+    This class handles the database SQL used in the assignment
+ */
 public class CovidMyOpener extends SQLiteOpenHelper {
 
 
@@ -20,12 +35,24 @@ public class CovidMyOpener extends SQLiteOpenHelper {
     public final static String COL_ID = "_id";
 
 
-    //Constructor
+    /*
+    @method: CovidMyOpener
+    @params: Context -The context
+
+    This method is the constructor for this class
+     */
     public CovidMyOpener(Context ctx) {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
 
-    @Override //onCreate method
+    /*
+        @method: onCreate
+        @params: SQLiteDatabase  -It takes an SQLitedatabase to be used
+        @returns: no return value
+
+        This method creates the table in the database
+     */
+    @Override
     public void onCreate(SQLiteDatabase db) {
 
         //**If you change anything in this method you must increment the VERSION_NUM to force rebuild**
@@ -36,6 +63,15 @@ public class CovidMyOpener extends SQLiteOpenHelper {
 
     }
 
+    /*
+        @method: onUpgrade
+        @params: SQLiteDatabase  -It takes an SQLitedatabase to be used
+                 oldVersion     -The old database version number
+                 newVersion     -The new database version number
+        @returns: no return value
+
+        This method drops the old table and replaces it with the newer version
+     */
     @Override //onUpgrade method
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -47,7 +83,17 @@ public class CovidMyOpener extends SQLiteOpenHelper {
 
     }
 
-    @Override //OnDowngrade method
+
+    /*
+        @method: onDowngrade
+        @params: SQLiteDatabase  -It takes an SQLitedatabase to be used
+                 oldVersion     -The old database version number
+                 newVersion     -The new database version number
+        @returns: no return value
+
+        This method drops the new table and replaces it with an older version
+     */
+    @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //Drop the old table
@@ -58,7 +104,16 @@ public class CovidMyOpener extends SQLiteOpenHelper {
 
     }
 
-    //Add data to table
+   /*
+        @method: insertEntry
+        @params: province -the province name
+                date -the date
+                numCases - number of cases
+        @return: boolean -returns true if the entry is saved in the table
+                         -returns false if the entry is not saved in the table
+
+        This method adds a new entry to the table
+    */
     public boolean insertEntry(String province, String date, String numCases) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -77,7 +132,13 @@ public class CovidMyOpener extends SQLiteOpenHelper {
     }
 
 
-    //Remove row of information
+    /*
+    @method: removeRow
+    @params: position   -position of the entry inside the arraylist
+    @returns: no return value
+
+    This method removes a row from the table
+     */
     public void removeRow(int position) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -86,16 +147,14 @@ public class CovidMyOpener extends SQLiteOpenHelper {
 
     }
 
-    //View data
-    public Cursor viewData() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select * from " + TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
 
-        return cursor;
-    }
+    /*
+    @method: getData
+    @params: no param
+    @returns: Cursor -To be able to iterate through the contents of the table
 
-    //Get the data
+    This method gets the data from the table and returns a cursor
+     */
     public Cursor getData() {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -104,33 +163,6 @@ public class CovidMyOpener extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
 
         return data;
-    }
-
-
-    //(used for debug purposes)
-    public void printCursor() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select * from " + TABLE_NAME;
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        int count = cursor.getCount();
-
-        int colIndex = cursor.getColumnIndex("COL_PROVINCE");
-
-        cursor.moveToFirst();
-
-        while (cursor.isAfterLast() == false) {
-            String message = cursor.getString(colIndex);
-            Log.d("Col names", cursor.getColumnName(colIndex));
-            Log.d("Province: ", message);
-            cursor.moveToNext();
-        }
-
-        Log.d("version Number", Integer.toString(db.getVersion()));
-        Log.d("num Cols", Integer.toString(cursor.getColumnCount()));
-        Log.d("getCount Num of rows ", Integer.toString(count));
     }
 
 } //End of MyOpener class

@@ -23,6 +23,23 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+
+/*
+Name: Wiam Assaad
+Student ID: 040905209
+Course & Section: CST2335 022
+Assignment: Final assignment Covid Task
+Due: Dec 11 2020
+*/
+
+
+/*
+    @class: CovidMainActivtiy
+    @extends: AppCompatActivity
+    @implements: NavigationView.OnNavigationItemSelectedListener
+
+    This class is where the user can choose which country and what dates to query for
+ */
 public class CovidMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     Button search, goToSavedEntries;
@@ -34,6 +51,14 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
 
     SharedPreferences prefs = null;
 
+
+    /*
+        @method: onCreate
+        @param: Bundle -saved instance state
+        @return: no return value
+
+        This method is called when this class first runs
+   */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,12 +142,17 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
         {
             startActivity(savedEntriesPage);
         });
+    } //End of onCreate method
 
 
+    /*
+        @method: onCreateOptionsMenu
+        @params: Menu
+        @return: boolean -returns true if the menu has inflated
 
-    }
-
-    @Override //Gets called when I used setSupportActionBar() to inflate the menu
+        This method is called when setSupportActionBar() is used to inflate the menu
+     */
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -131,7 +161,13 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
+    /*
+        @method: onOptionsItemSelected
+        @params: MenuItem -The item on the toolbar that is selected
+        @return: boolean
 
+         This method handles what happens when an item on the toolbar is clicked
+    */
     @Override //What to do when you click on an item from the toolbar
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
@@ -140,21 +176,21 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
         {
             //what to do when the menu item is selected:
             case R.id.item1:
-                message = "You clicked covidmusic task";
+                message = "music";
                 break;
 
             case R.id.item2:
-                message = "You clicked covidrecipe task";
+                message = "recipe";
                 break;
 
             case R.id.item3:
-                message = "You clicked go to main activity";
+                message = "home";
                 Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item4:
-                message = "You clicked go to saved entries";
+                message = "saved entries";
                 Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
@@ -187,42 +223,48 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
     }
 
 
+    /*
+        @method: onNavigationItemSelected
+        @params: MenuItem   -The item that is selected on the navigation drawer
+        @return: boolean
 
-    // Needed for the OnNavigationItemSelected interface:
-    //When someone clicks on an item on the navigation drawer
+        This method handles what happens when an item on the navigation drawer is selected
+    */
     public boolean onNavigationItemSelected( MenuItem item) {
 
         String message = null;
 
+        //Depending on what item is selected, an action occurs
         switch(item.getItemId())
         {
             case R.id.item1:
-                //message = "You clicked cart";
+                message = "music";
                 Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item2:
-                //message = "You clicked credit card";
+                message = "recipe";
                 Intent weatherPage = new Intent(this, CovidMainActivity.class);
                 startActivity(weatherPage);
                 break;
 
             case R.id.item3:
-                message = "You clicked go to main activity";
+                message = "home";
                 Intent loginPage = new Intent(this, CovidMainActivity.class);
                 startActivity(loginPage);
                 break;
 
             case R.id.item4:
-                message = "You clicked go to saved entries";
+                message = "saved entries";
                 Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
             case R.id.itemHelp:
-                message = "You clicked on help";
+                message = "help";
 
+                //Instructions for the user if they are in need of help
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
 
@@ -251,8 +293,14 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
 
 
 
+    /*
+        @method saveSharedPrefs
+        @params: String -the name of the country we wish to save
+                 String -date start
+                 String -date end
 
-    //Adds the string to saved prefs
+        This method adds a string to saved preferences
+     */
     private void saveSharedPrefs(String savedCountry, String date1, String date2) {
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -265,21 +313,39 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
     }
 
 
+    /*
+        @method: onStart
+        @return: no return value
+     */
     @Override
     protected void onStart() {
         super.onStart();
     }
 
+    /*
+        @method: onResume
+        @return: no return value
+     */
     @Override
     protected void onResume() {
         super.onResume();
     }
 
+    /*
+        @method: onStop
+        @return: no return value
+     */
     @Override
     protected void onStop() {
         super.onStop();
     }
 
+    /*
+        @method: onPause
+        @return: no return value
+
+        Stores the data to the shared preferences
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -287,6 +353,10 @@ public class CovidMainActivity extends AppCompatActivity implements NavigationVi
                 fromDate.getText().toString(), toDate.getText().toString() );
     }
 
+    /*
+        @method: onDestroy
+        @return: no return value
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();

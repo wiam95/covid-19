@@ -10,7 +10,7 @@
     <string name="close">Close</string>
     <string name="covid19" translatable="false">COVID-19</string>
     <string name="submit">submit</string>
-    <string name="savedEntries">saved entries</string>
+    <string name="savedEntries">SAVED ENTRIES</string>
     <string name="madeBy">Made by Wiam</string>
     <string name="task">Covid Task</string>
     <string name="cases">cases:</string>

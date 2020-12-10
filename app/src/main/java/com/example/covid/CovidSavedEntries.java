@@ -26,6 +26,23 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
+
+/*
+Name: Wiam Assaad
+Student ID: 040905209
+Course & Section: CST2335 022
+Assignment: Final assignment Covid Task
+Due: Dec 11 2020
+*/
+
+
+/*
+    @Class: CovidSavedEntries
+    @extends: AppCompatActivity
+    @implements: NavigationView.OnNavigationItemSelectedListener
+
+    This class displays all the saved entries from the database and displays to a list
+ */
 public class CovidSavedEntries extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     CovidMyOpener covidMyOpener;
@@ -37,6 +54,14 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
     TextView savedListTitle;
     ListView databaseList;
 
+
+    /*
+        @method: onCreate
+        @params: Bundle -saved instance state
+        @return: no return value
+
+        This method is called when the class runs
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,20 +90,18 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
+        //Sets the adapter
         databaseList.setAdapter( (ListAdapter) ( myAdapter = new CovidSavedEntries.MyListAdapter() ) );
 
+        //Populates the listView with the saved entries from database
         fillListView();
-
 
 
         //If you click on a message
         databaseList.setOnItemLongClickListener((parent, view, position, id) -> {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Do you want to delete this entry?")
+            alertDialogBuilder.setTitle("Delete this entry?")
 
 
                     //what the Yes button does:
@@ -89,7 +112,7 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
 
                         covidMyOpener.removeRow(position); //Removes from the database
 
-                        myAdapter.notifyDataSetChanged(); //Notifies the list that a change has occurred
+                        myAdapter.notifyDataSetChanged(); //Notifies that a change has occurred
 
                     })
 
@@ -107,7 +130,14 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
     } //End of onCreate method
 
 
-    @Override //Gets called when I used setSupportActionBar() to inflate the menu
+    /*
+        @method: onCreateOptionsMenu
+        @params: Menu
+        @return: boolean -returns true if the menu has inflated
+
+        This method is called when setSupportActionBar is called to inflate the menu
+     */
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -117,6 +147,13 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
     }
 
 
+    /*
+        @method: onOptionsItemSelected
+        @param: MenuItem
+        @returns: boolean
+
+        This method handles what happens when someone clicks on an item on the toolbar
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
@@ -125,28 +162,28 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
         {
             //what to do when the menu item is selected:
             case R.id.item1:
-                message = "You clicked covidmusic task";
+                message = "music";
                 break;
 
             case R.id.item2:
-                message = "You clicked covidrecipe task";
+                message = "recipe";
                 break;
 
             case R.id.item3:
-                message = "You clicked go to main activity";
+                message = "home";
                 //This creates a transition to load CovidQuery
                 Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item4:
-                message = "You clicked go to saved entries";
+                message = "saved entries";
                 Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
             case R.id.itemHelp:
-                message = "You clicked on help";
+                message = "help";
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
@@ -170,9 +207,13 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
     }
 
 
+    /*
+        @method: onNavigationItemSelected
+        @params: MenuItem
+        @returns: boolean
 
-    // Needed for the OnNavigationItemSelected interface:
-    //When someone clicks on an item on the navigation drawer
+        This method handles what happens when someone clicks an item on the navigation drawer
+     */
     public boolean onNavigationItemSelected( MenuItem item) {
 
         String message = null;
@@ -180,31 +221,31 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
         switch(item.getItemId())
         {
             case R.id.item1:
-                //message = "You clicked cart";
+                message = "music";
                 Intent mainPage = new Intent(this, CovidMainActivity.class);
                 startActivity(mainPage);
                 break;
 
             case R.id.item2:
-                //message = "You clicked credit card";
+                message = "recipe";
                 Intent weatherPage = new Intent(this, CovidMainActivity.class);
                 startActivity(weatherPage);
                 break;
 
             case R.id.item3:
-                message = "You clicked go to main activity";
+                message = "home";
                 Intent loginPage = new Intent(this, CovidMainActivity.class);
                 startActivity(loginPage);
                 break;
 
             case R.id.item4:
-                message = "You clicked go to saved entries";
+                message = "saved entries";
                 Intent savedPage = new Intent(this, CovidSavedEntries.class);
                 startActivity(savedPage);
                 break;
 
             case R.id.itemHelp:
-                message = "You clicked on help";
+                message = "help";
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Instructions")
@@ -232,11 +273,13 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
         return false;
     }
 
+    /*
+        @method: fillListView
+        @params: none
+        @returns: no return value
 
-
-
-
-
+        This method fills the listView using the data from the database by looping through a Cursor
+     */
     private void fillListView() {
 
         Cursor data = covidMyOpener.getData();
@@ -255,24 +298,56 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
 
     } //End of fillListView method
 
+    /*
+        @Class: MyListAdapter
+        @extends: BaseAdapter
 
+        This class handles how the our custom listview will appear
+     */
     //MyListAdapter class
     private class MyListAdapter extends BaseAdapter {
 
+        /*
+            @method: getCount
+            @return: int -size of the arrayList
+
+            This method returns the size of the arraylist to be displayed in the list
+         */
         public int getCount() {
             return dbData.size();
         } //Size of arrayList
 
+        /*
+            @method: getItem
+            @param: int -position in the arrayList
+            @returns: ArrayList<CovidEntry> -Returns an array list of type class Covid Entry
+
+            This method returns the data at that postion of the arraylist
+         */
         public ArrayList<CovidEntry> getItem(int position) { return dbData; } //Gets the item
 
-        //Gets the ID for the item
-        public long getItemId(int position) {
+
+        /*
+            @method: getItemId
+            @params: int -position in the arraylist
+            @return: long -the id the of that position
+
+            This method returns the id of the item in that position of the arraylist
+        */
+        public long getItemId(int position) { //Gets the ID for the item
 
             return position;
 
         }
 
-        //The view
+        /*
+            @method: getView
+            @params: int    -position of the item in the arraylist
+                     View   -The view
+                     ViewGroup -The viewgroup
+
+            This method handles how what data the listview will have in each entry
+         */
         public View getView(int position, View old, ViewGroup parent) {
 
             View newView;
