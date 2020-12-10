@@ -164,6 +164,8 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
         //Search button
         search.setOnClickListener(click-> {
 
+            clearListView();
+
             //Two lines of code to get AsyncTask going to retrieve data from a site
             CQuery req = new CQuery(); //Creates a background thread
             req.execute(searchQ); //Type 1 (This starts AsyncTask)
@@ -420,13 +422,25 @@ public class CovidQuery extends AppCompatActivity implements NavigationView.OnNa
          */
         //Type 3
         public void onPostExecute(ArrayList<CovidEntry> covidList) {
-            //progressBar.setVisibility(View.INVISIBLE);
-            //super.onPostExecute(covidList);
 
             myAdapter.notifyDataSetChanged();
 
         }
     } //End of CQuery class
+
+
+    /*
+        @method: clearListView
+        @params: none
+        @return: no return value
+
+        This method clears the list of queries
+     */
+    public void clearListView()
+    {
+        covidList.clear();
+        myAdapter.notifyDataSetChanged();
+    }
 
 
     /*

@@ -131,19 +131,21 @@ public class CovidMyOpener extends SQLiteOpenHelper {
         return true;
     }
 
-
     /*
-    @method: removeRow
-    @params: position   -position of the entry inside the arraylist
-    @returns: no return value
+        @method: deleteWithoutID
+        @params: String -province name
+                 String -date
+                 String -number of cases
+        @returns: no return value
 
-    This method removes a row from the table
+        This method removes the entry from the database
      */
-    public void removeRow(int position) {
+    public void deleteWithoutID(String province, String date, String cases) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete("SAVEDENTRIES", "_id = ?", new String[]{Long.toString(position)});
+        db.delete( "SAVEDENTRIES", "PROVINCE = ? AND " +
+                "DATE = ? AND NUMCASES = ?", new String[]{ province, date, cases } );
 
     }
 

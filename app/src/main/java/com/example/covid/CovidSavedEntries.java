@@ -108,9 +108,15 @@ public class CovidSavedEntries extends AppCompatActivity implements NavigationVi
                     .setPositiveButton("Yes", (click, arg) -> {
 
                         //Remove this entry
+
+
+                        //Search for the ID
+
+                        covidMyOpener.deleteWithoutID( dbData.get(position).getProv(),
+                                dbData.get(position).getDate(), dbData.get(position).getCases() );
+
                         dbData.remove(position); //Removes from the arrayList
 
-                        covidMyOpener.removeRow(position); //Removes from the database
 
                         myAdapter.notifyDataSetChanged(); //Notifies that a change has occurred
 
