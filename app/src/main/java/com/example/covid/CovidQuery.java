@@ -51,7 +51,7 @@ Due: Dec 11 2020
     @extends: AppCompatActivity
     @implements: NavigationView.OnNavigationItemSelectedListener
 
-    This class handles the query, pulls the data from the site, and displays the data on a list
+    This class handles the query, pulls the data from the site, and displays the data on a list.
  */
 public class CovidQuery extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
